@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var task: UITextField!
+    @IBOutlet var scoreForTask: UITextField!
+    @IBOutlet var totalScore: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +25,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func enterScore(_ sender: UIButton) {
+        // app delegate는 싱글톤 객체이므로, 현재 생성되어 있는 인스턴스를 참조해야 한다 -> UIApplication.shared...
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        var totalScoreToInt = Int(self.totalScore.text!)! + Int(self.scoreForTask.text!)!
+        appDelegate?.paramTotalScore = totalScoreToInt
+    }
 
 }
 
